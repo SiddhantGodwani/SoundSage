@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Recommendation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Song Recommendation</h1>
+    <label for="liked-songs">Enter the names of songs you like (separated by commas):</label>
+    <input type="text" id="liked-songs" name="liked-songs">
+    <button id="recommend-btn">Get Recommendations</button>
+
+    <div id="recommendations"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#recommend-btn').click(function() {
+                var likedSongs = $('#liked-songs').val().split(',').map(function(song) {
+                    return song.trim();
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/recommend',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify({ 'likedSongs': likedSongs }),
+                    success: function(data) {
+                        var recommendations = $('#recommendations');
+                        recommendations.empty();
+                        recommendations.append('<h2>Recommended Songs:</h2>');
+                        recommendations.append('<ul>');
+                        data.forEach(function(track) {
+                            var listItem = $('<li>');
+                            listItem.append(track.artist + ' - ' + track.name);
+                            if (track.preview_url) {
+                                var audioPlayer = $('<audio controls>');
+                                audioPlayer.attr('src', track.preview_url);
+                                listItem.append(' ');
+                                listItem.append(audioPlayer);
+                            }
+                            recommendations.append(listItem);
+                        });
+                        recommendations.append('</ul>');
+                    },
+                    error: function() {
+                        alert('Error getting recommendations.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
