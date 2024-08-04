@@ -1,3 +1,5 @@
+#12.2 but 12.3.1 is also working kinda
+
 import streamlit as st
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
