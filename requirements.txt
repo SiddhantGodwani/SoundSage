@@ -1,0 +1,9 @@
+streamlit
+spotipy
+numpy
+librosa
+requests
+googleapiclient
+pandas
+plotly
+streamlit_lottie
