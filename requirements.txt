@@ -1,4 +1,4 @@
---upgrade pip
+-r upgrade pip
 librosa==0.10.1
 numpy==1.23.4
 packaging==24.0
