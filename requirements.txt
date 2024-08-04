@@ -1,5 +1,5 @@
--- upgrade pip -r
-python==3.7
+pip install --upgrade pip -r
+python==3.7.0
 librosa==0.10.1
 numpy==1.23.4
 packaging==24.0
