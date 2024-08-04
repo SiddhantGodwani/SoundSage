@@ -366,4 +366,4 @@ st.sidebar.info("""
 
 # Footer
 st.markdown("---")
-st.markdown("Created with ❤️ by Siddhant Godwani")
+st.markdown("Created with ❤️ By SoundSage Team")
