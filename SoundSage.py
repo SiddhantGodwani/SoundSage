@@ -1,4 +1,7 @@
 #12.2 but 12.3.1 is also working kinda
+#from dotenv import load_dotenv
+#import os
+#load_dotenv()   #environment variables
 
 import streamlit as st
 import spotipy
@@ -19,19 +22,26 @@ import urllib.parse
 import pickle
 import logging
 import plotly.graph_objs as go
+from dotenv import load_dotenv
+import os
 
 # Set up logging
 logging.basicConfig(filename='app.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Set up credentials
+load_dotenv()   #environment variables
+
 # Set up Spotify credentials
-client_id = "609dac35b10a47ee87d9ce8ad8f62b8a"
-client_secret = "ae5ab9ca068f4feaa2d40a86d6e86069"
+client_id = os.getenv("client_id")
+client_secret = os.getenv("client_secret")
+# Set up Google API credentials
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Set up Google API credentials
-YOUTUBE_API_KEY = "AIzaSyC7vUv6GFbU_-8fHe1llSAz-moq3gDykgE"
 youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY)
 
 # Define the audio features to extract
