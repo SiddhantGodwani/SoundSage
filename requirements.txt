@@ -12,5 +12,5 @@ spotipy
 librosa
 streamlit-lottie
 google-api-python-client
-dotenv
+python-dotenv
 os
