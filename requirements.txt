@@ -9,5 +9,5 @@ plotly
 requests
 scikit-learn
 spotipy
-
+librosa
 streamlit-lottie
