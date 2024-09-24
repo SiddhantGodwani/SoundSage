@@ -11,4 +11,4 @@ scikit-learn
 spotipy
 librosa
 streamlit-lottie
-googleapiclient
+google-api-python-client
