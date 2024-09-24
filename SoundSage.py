@@ -164,7 +164,10 @@ def get_recommendations(track_name):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             track_preview_path = download_preview(track_preview_url, tmp_dir)
-            track_librosa_features = get_librosa_features(track_preview_path) if track_preview_path else None
+            if track_preview_path:
+                track_librosa_features = get_librosa_features(track_preview_path)
+            else:
+                track_librosa_features = None
 
             recommendations = defaultdict(list)
             for seed_track in [track_uri]:
@@ -176,7 +179,10 @@ def get_recommendations(track_name):
                     preview_path = download_preview(preview_url, tmp_dir)
                     if preview_path:
                         librosa_features = get_librosa_features(preview_path)
-                        similarity = np.linalg.norm(track_audio_features - audio_features) + sum(np.linalg.norm(feature1 - feature2) for feature1, feature2 in zip(track_librosa_features, librosa_features))
+                        if track_librosa_features is not None and librosa_features is not None:
+                            similarity = np.linalg.norm(track_audio_features - audio_features) + sum(np.linalg.norm(feature1 - feature2) for feature1, feature2 in zip(track_librosa_features, librosa_features))
+                        else:
+                            similarity = np.linalg.norm(track_audio_features - audio_features)
                     else:
                         similarity = np.linalg.norm(track_audio_features - audio_features)
 
