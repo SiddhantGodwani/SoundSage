@@ -30,13 +30,23 @@ logging.basicConfig(filename='app.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Set up credentials
-load_dotenv()   #environment variables
+#load_dotenv()   #environment variables  - for loading env file credemtials
+
+# # Set up Spotify credentials
+# client_id = os.getenv("client_id")
+# client_secret = os.getenv("client_secret")
+# # Set up Google API credentials
+# YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 # Set up Spotify credentials
-client_id = os.getenv("client_id")
-client_secret = os.getenv("client_secret")
+client_id = st.secrets["client_id"]
+client_secret = st.secrets["client_secret"]
 # Set up Google API credentials
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
+
+
+
+
 
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
