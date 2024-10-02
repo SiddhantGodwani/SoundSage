@@ -1,3 +1,6 @@
+### Adding Play Button
+'''[![Streamlit App](https://soundsage.streamlit.app/)](https://soundsage.streamlit.app/)
+
 # SoundSage
 SoundSage/AudiOra
  flask run 
