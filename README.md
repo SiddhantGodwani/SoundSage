@@ -2,6 +2,8 @@
 SoundSage/AudiOra
  flask run 
 
+Main File - soundsage.py
+
 Dependencies:
 
 pip install flask spotipy librosa scikit-learn 
