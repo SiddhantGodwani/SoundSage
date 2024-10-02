@@ -334,9 +334,9 @@ def load_lottie_file(file_path):
         return None
 
 # Embedding
-<iframe
-  src="https://soundsage.streamlit.app/?embed=true"
-></iframe>
+# <iframe
+#   src="https://soundsage.streamlit.app/?embed=true"
+# ></iframe>
 
 # Main Streamlit app
 st.title("Sound Sage :)")
