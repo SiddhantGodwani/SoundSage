@@ -1,5 +1,5 @@
 ### Adding Play Button
-'''[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://<your-custom-subdomain>.streamlit.app)(https://soundsage.streamlit.app/)
+'''[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://soundsage.streamlit.app/)
 
 # SoundSage
 SoundSage/AudiOra
