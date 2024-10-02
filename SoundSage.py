@@ -353,7 +353,7 @@ if st.sidebar.button("Clear Old Cache Entries", key="clear_cache"):
 track_name = st.text_input("Enter a song name:", key="song_input")
 
 if track_name:
-    lottie_file_path = Loading_Animation.json"
+    lottie_file_path = "Loading_Animation.json"
     lottie_animation = load_lottie_file(lottie_file_path)
 
     cached_recommendations = get_cached_recommendations(track_name, max_age_days)
