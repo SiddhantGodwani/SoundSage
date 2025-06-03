@@ -1,7 +1,5 @@
+
 #12.2 but 12.3.1 is also working kinda
-#from dotenv import load_dotenv
-#import os
-#load_dotenv()   #environment variables
 
 import streamlit as st
 import spotipy
@@ -22,36 +20,19 @@ import urllib.parse
 import pickle
 import logging
 import plotly.graph_objs as go
-from dotenv import load_dotenv
-import os
 
 # Set up logging
 logging.basicConfig(filename='app.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Set up credentials
-#load_dotenv()   #environment variables  - for loading env file credemtials
-
-# # Set up Spotify credentials
-# client_id = os.getenv("client_id")
-# client_secret = os.getenv("client_secret")
-# # Set up Google API credentials
-# YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-
 # Set up Spotify credentials
-client_id = st.secrets["client_id"]
-client_secret = st.secrets["client_secret"]
-# Set up Google API credentials
-YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
-
-
-
-
-
+client_id = "609dac35b10a47ee87d9ce8ad8f62b8a"
+client_secret = "ae5ab9ca068f4feaa2d40a86d6e86069"
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 # Set up Google API credentials
+YOUTUBE_API_KEY = "AIzaSyC7vUv6GFbU_-8fHe1llSAz-moq3gDykgE"
 youtube = build("youtube", "v3", developerKey=YOUTUBE_API_KEY)
 
 # Define the audio features to extract
@@ -262,7 +243,7 @@ def display_recommendations(recommendations):
                     threading.Thread(target=store_feedback, args=(track['id'], rating)).start()
                     st.success("Thank you for your feedback!", icon="✅")
 
-                st.button("Rate", key=f"submit_{track['id']}_{i}", on_click=on_click_callback)
+                st.button("Submit Rating", key=f"submit_{track['id']}_{i}", on_click=on_click_callback)
 
     # Visualization
     st.subheader("Audio Features Visualization")
@@ -333,13 +314,8 @@ def load_lottie_file(file_path):
         logging.error(f"Error loading Lottie file: {e}")
         return None
 
-# Embedding
-# <iframe
-#   src="https://soundsage.streamlit.app/?embed=true"
-# ></iframe>
-
 # Main Streamlit app
-st.title("Sound Sage :)")
+st.title("Music Recommendation System")
 
 # Sidebar for additional options
 st.sidebar.header("Options")
@@ -353,7 +329,7 @@ if st.sidebar.button("Clear Old Cache Entries", key="clear_cache"):
 track_name = st.text_input("Enter a song name:", key="song_input")
 
 if track_name:
-    lottie_file_path = "Loading_Animation.json"
+    lottie_file_path = r"C:\Users\SIDDHANT GODWANI\Desktop\Streamlit Music R\Loading_Animation.json"
     lottie_animation = load_lottie_file(lottie_file_path)
 
     cached_recommendations = get_cached_recommendations(track_name, max_age_days)
@@ -385,15 +361,13 @@ if track_name:
 st.header("Help us improve!")
 feedback = st.text_area("Please provide any feedback on the recommendations:", key="feedback_input")
 if st.button("Submit Feedback", key="submit_feedback"):
-    # Here you would typically send this feedback to a database or file we dont need this right now (u wont read this anyway)
+    # Here you would typically send this feedback to a database or file
     st.success("Thank you for your feedback!")
 
 # Add some information about the app
 st.sidebar.markdown("---")
 st.sidebar.info("""
-    This app uses Audio Features of songs from Spotify and YouTube APIs to provide music recommendations.
-    Wait time:  1-2 minutes.
-    -> The loading time is a bit long as it takes song data live from the server and extractts audio features from them for you.
+    This app uses Spotify and YouTube APIs to provide music recommendations.
     It also caches results to improve performance on repeat searches.
     """)
 
